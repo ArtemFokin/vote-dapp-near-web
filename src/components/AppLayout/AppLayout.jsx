@@ -7,11 +7,11 @@ const { Header, Content } = Layout;
 
 const AppLayout = () => {
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh" }}>
       <Header>
         <AppHeader />
       </Header>
-      <Content>
+      <Content style={{ height: "100%" }}>
         <Outlet />
       </Content>
     </Layout>
