@@ -1,9 +1,13 @@
 import React, { useMemo } from "react";
 import { Typography, Button, Table } from "antd";
+import { useNear } from "../../hooks/near";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
-const PoolsTable = ({ pools, onPoolClick }) => {
+const PoolsTable = ({ pools, onPoolJoin, onPoolDelete }) => {
+  const { wallet } = useNear();
+  const userAcc = useMemo(() => wallet.getAccountId(), [wallet]);
   const columns = [
     {
       title: "Pool name",
@@ -19,9 +23,22 @@ const PoolsTable = ({ pools, onPoolClick }) => {
     },
     {
       title: "",
+      key: "delete",
+      render: (text, record) =>
+        userAcc === record.owner && (
+          <Button
+            type="text"
+            shape="circle"
+            onClick={() => onPoolDelete(record.key)}
+            icon={<DeleteOutlined />}
+          />
+        ),
+    },
+    {
+      title: "",
       key: "name",
       render: (text, record) => (
-        <Button type="primary" onClick={() => onPoolClick(record.key)}>
+        <Button type="primary" onClick={() => onPoolJoin(record.key)}>
           Join
         </Button>
       ),
@@ -40,10 +57,11 @@ const PoolsTable = ({ pools, onPoolClick }) => {
 
   return (
     <Table
-      style={{ width: 600, maxWidth: "90%" }}
+      style={{ maxWidth: "90%" }}
       columns={columns}
       dataSource={tableRows}
       pagination={false}
+      bordered={false}
     />
   );
 };

@@ -8,12 +8,12 @@ const POOLS = [
   {
     id: "1",
     name: "Superman vs Batman",
-    owner: "arty.testnet",
+    owner: "artyom_fokin.testnet",
   },
   {
-    id: "1",
+    id: "2",
     name: "Is the earth round?",
-    owner: "arty.testnet",
+    owner: "artyom_fn.testnet",
   },
 ];
 
@@ -29,7 +29,11 @@ const HomePage = () => {
         >
           Create Pool
         </Button>
-        <PoolsTable pools={POOLS} />
+        <PoolsTable
+          pools={POOLS}
+          onPoolJoin={() => {}}
+          onPoolDelete={() => {}}
+        />
       </Space>
     </Row>
   );
