@@ -1,20 +1,6 @@
 import React from "react";
-import {
-  Form,
-  Button,
-  Input,
-  Row,
-  Col,
-  Space,
-  Typography,
-  PageHeader,
-} from "antd";
-import {
-  PlusOutlined,
-  MinusOutlined,
-  LeftCircleOutlined,
-  LeftOutlined,
-} from "@ant-design/icons";
+import { Form, Button, Input, Row, Col, Space, Typography } from "antd";
+import { PlusOutlined, MinusOutlined, LeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
 const MIN_OPTIONS_COUNT = 2;
@@ -48,6 +34,13 @@ const NewPool = ({ onSubmit }) => {
             options: ["", ""],
           }}
         >
+          <Form.Item
+            name="name"
+            label="Pool name"
+            rules={[{ required: true, message: "Please input Pool name!" }]}
+          >
+            <Input />
+          </Form.Item>
           <Form.Item
             name="question"
             label="Question"

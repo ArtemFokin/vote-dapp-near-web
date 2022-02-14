@@ -11,6 +11,7 @@ import {
   Outlet,
 } from "react-router-dom";
 import NewPoolConnected from "./NewPool/NewPoolConnected";
+import PoolConnected from "./Pool/PoolConnected";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           >
             <Route path="/" element={<HomePage />} />
             <Route path="/new-pool" element={<NewPoolConnected />} />
+            <Route path="/pool/:id" element={<PoolConnected />} />
           </Route>
           <Route path="/login" element={<Login />} />
         </Route>

@@ -57,7 +57,7 @@ const PoolsTable = ({ pools, onPoolJoin, onPoolDelete }) => {
 
   return (
     <Table
-      style={{ maxWidth: "90%" }}
+      style={{ maxWidth: "90%", width: 700 }}
       columns={columns}
       dataSource={tableRows}
       pagination={false}
