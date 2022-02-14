@@ -16,15 +16,16 @@ const NewPool = ({ onSubmit }) => {
   return (
     <Row justify="center">
       <Space direction="vertical">
-        <Space align="center">
-          <Button
-            shape="circle"
-            type="text"
-            icon={<LeftOutlined />}
-            onClick={() => navigate("/")}
-          />
-          <Typography.Title style={{ margin: 0 }}>New Pool</Typography.Title>
-        </Space>
+        <Button
+          shape="round"
+          type="ghost"
+          icon={<LeftOutlined />}
+          onClick={() => navigate("/")}
+        >
+          Back
+        </Button>
+        <Typography.Title style={{ margin: 0 }}>New Pool</Typography.Title>
+
         <Form
           layout="vertical"
           size="large"

@@ -36,7 +36,7 @@ const PoolConnected = () => {
     return <Typography.Title>Pool '{id}' not found</Typography.Title>;
   }
 
-  return <Pool pool={id} onVote={onVote} />;
+  return <Pool pool={pool} onVote={onVote} />;
 };
 
 export default PoolConnected;
