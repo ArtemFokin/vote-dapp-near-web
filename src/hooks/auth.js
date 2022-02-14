@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useNear } from "../components/NearProvider/NearProvider";
+import { useNear } from "./near";
 
 export const useCheckAuth = () => {
   const { wallet } = useNear();

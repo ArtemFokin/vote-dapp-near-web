@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Spin, Row } from "antd";
 import * as nearAPI from "near-api-js";
 
-const NearContext = createContext();
+export const NearContext = createContext();
 
 const NearProvider = ({ children, config }) => {
   const [near, setNear] = useState();
@@ -52,11 +52,6 @@ const NearProvider = ({ children, config }) => {
       {children}
     </NearContext.Provider>
   );
-};
-
-export const useNear = () => {
-  const near = useContext(NearContext);
-  return near;
 };
 
 export default NearProvider;

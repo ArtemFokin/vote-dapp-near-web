@@ -11,7 +11,7 @@ const AppLayout = () => {
       <Header>
         <AppHeader />
       </Header>
-      <Content style={{ height: "100%" }}>
+      <Content style={{ height: "100%", padding: 50 }}>
         <Outlet />
       </Content>
     </Layout>

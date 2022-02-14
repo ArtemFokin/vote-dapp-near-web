@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNear } from "./near";
 
 export const useCurrentUser = () => {
-  const { wallet } = useWallet();
+  const { wallet } = useNear();
   const [loading, setLoading] = useState(true);
   const [userState, setUserState] = useState();
 
   useEffect(() => {
     let cancelled = false;
-    (() => {
+    (async () => {
       setLoading(true);
       const state = await wallet.account().state();
       if (!cancelled) {

@@ -4,7 +4,13 @@ import Login from "./Login/Login";
 import AppLayout from "./AppLayout/AppLayout";
 import HomePage from "./HomePage/HomePage";
 import RequireAuth from "./RequireAuth/RequireAuth";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import NewPoolConnected from "./NewPool/NewPoolConnected";
 
 function App() {
   return (
@@ -15,11 +21,14 @@ function App() {
             path="/"
             element={
               <RequireAuth>
-                <HomePage />
+                <Outlet />
               </RequireAuth>
             }
-          />
-          <Route path="/login" element={<Login />}></Route>
+          >
+            <Route path="/" element={<HomePage />} />
+            <Route path="/new-pool" element={<NewPoolConnected />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </Router>
