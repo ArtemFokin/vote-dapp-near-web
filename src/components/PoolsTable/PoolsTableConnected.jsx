@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PoolsTable from "./PoolsTable";
 import { useNavigate } from "react-router";
-import { getPools, deletePool } from "../api";
+import { getPools, deletePool } from "../../api";
 import { Typography, Spin } from "antd";
 
 const PoolsTableConnected = () => {
@@ -20,11 +20,12 @@ const PoolsTableConnected = () => {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      setLoading(true);
       const pls = await getPools();
-      if (!cancelled) {
-        setPools(pls);
-        setLoading(false);
-      }
+      if (cancelled) return;
+      const notCancelledPools = pls.filter((p) => !p.deleted);
+      setPools(notCancelledPools);
+      setLoading(false);
     })();
     return () => (cancelled = true);
   }, [refetch]);

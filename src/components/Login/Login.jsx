@@ -1,12 +1,11 @@
 import React from "react";
 import { Button, Row, Typography, Space } from "antd";
 import { useLogin, useCheckAuth } from "../../hooks/auth";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 const Login = () => {
   const login = useLogin();
   const location = useLocation();
-  const navigate = useNavigate();
   const isAuth = useCheckAuth();
   const from = location.state?.from?.pathname || "/";
 
