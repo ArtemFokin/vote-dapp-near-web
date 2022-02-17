@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PoolsTable from "./PoolsTable";
 import { useNavigate } from "react-router";
-import { getPools, deletePool } from "../../api";
-import { Typography, Spin } from "antd";
+import { Typography, Spin, notification } from "antd";
 import { useNear } from "../../hooks/near";
 
 const PoolsTableConnected = () => {
@@ -11,8 +10,19 @@ const PoolsTableConnected = () => {
   const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(true);
   const navigate = useNavigate();
-  const onPoolDelete = (pool) => {
-    deletePool(pool);
+  const onPoolDelete = async (pool) => {
+    try {
+      await contract.deletePool({ poolId: pool });
+      setPools((currentPools) =>
+        currentPools.filter((pool) => pool.id === pool)
+      );
+    } catch (err) {
+      notification.error({
+        message: "Blockchain error",
+        description: "Please try again later",
+      });
+      console.log(err);
+    }
     setRefetch((r) => !r);
   };
   const onPoolJoin = (pool) => {
@@ -23,12 +33,18 @@ const PoolsTableConnected = () => {
     let cancelled = false;
     (async () => {
       setLoading(true);
-      const pls = await getPools();
-      // const asyncPools = await .getPoolsList(0, 10);
-      console.log({ contract });
-      if (cancelled) return;
-      const notCancelledPools = pls.filter((p) => !p.deleted);
-      setPools(notCancelledPools);
+      try {
+        const result = await contract.getPoolsList({ offset: 0, limit: 10 });
+        if (cancelled) return;
+        const notCancelledPools = result.filter((p) => !p.deleted);
+        setPools(notCancelledPools);
+      } catch (err) {
+        console.log(err);
+        notification.error({
+          message: "Blockchain error",
+          description: "Please try again later",
+        });
+      }
       setLoading(false);
     })();
     return () => (cancelled = true);

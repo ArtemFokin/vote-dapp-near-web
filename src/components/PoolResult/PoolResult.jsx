@@ -14,7 +14,7 @@ const PoolResult = ({ options, votes }) => {
       return {
         name: option.value,
         votes: optionVotes.length,
-        userVote: optionVotes.some((vote) => vote.accountId === userAccount),
+        userVote: optionVotes.some((vote) => vote.owner === userAccount),
       };
     });
   }, [options, userAccount, votesGroupByOption]);

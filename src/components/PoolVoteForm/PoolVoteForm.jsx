@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, List, Form, Radio } from "antd";
 
-const PoolVoteForm = ({ onFinish, options }) => {
+const PoolVoteForm = ({ onFinish, options, sending }) => {
   return (
     <Form onFinish={(values) => onFinish(values.answer)}>
       <Form.Item
@@ -21,7 +21,7 @@ const PoolVoteForm = ({ onFinish, options }) => {
         </Radio.Group>
       </Form.Item>
       <Form.Item noStyle>
-        <Button htmlType="submit" type="primary">
+        <Button htmlType="submit" type="primary" loading={sending}>
           Vote
         </Button>
       </Form.Item>

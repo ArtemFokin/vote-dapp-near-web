@@ -1,37 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PoolCard from "./PoolCard";
 import { useParams } from "react-router";
-import {
-  getPool,
-  checkAccountVote,
-  getPoolOptions,
-  crateVote,
-} from "../../api";
-import { Typography, Spin } from "antd";
+import { Typography, Spin, Row } from "antd";
 import usePromise from "react-use-promise";
 import { useNear } from "../../hooks/near";
 
 const PoolCardConnected = () => {
   const { id } = useParams();
-  const { wallet } = useNear();
+  const poolId = useMemo(() => parseInt(id), [id]);
+  const { contract } = useNear();
+
   const [refetchUserVoted, setRefetchUserVoted] = useState(false);
 
-  const [pool, , poolState] = usePromise(() => getPool(id), [id]);
-  const [userVoted, , userVotedState] = usePromise(
-    () => checkAccountVote(wallet.getAccountId(), id),
-    [id, wallet, refetchUserVoted]
+  const [pool, getContractError, poolState] = usePromise(
+    () => contract.getPool({ id: poolId }),
+    [poolId, contract]
   );
-  const [options, , optionsState] = usePromise(() => getPoolOptions(id), [id]);
+  const [userVoted, checkAccountError, userVotedState] = usePromise(
+    () => contract.checkAccountVote({ poolId }),
+    [poolId, contract, refetchUserVoted]
+  );
+
+  const [options, getPoolOptionsError, optionsState] = usePromise(
+    () => contract.getPoolOptions({ poolId }),
+    [poolId, contract]
+  );
+
+  if (getPoolOptionsError || checkAccountError || getContractError) {
+    console.log({
+      getPoolOptionsError,
+      checkAccountError,
+      getContractError,
+    });
+    return (
+      <Row justify="center">
+        <Typography.Title level={3}>
+          Error during request data from blockchain
+        </Typography.Title>
+      </Row>
+    );
+  }
 
   if (poolState === "pending") {
     return <Spin />;
   }
 
   const onVote = async (option) => {
-    const r = await crateVote(option, wallet.getAccountId());
-    if (r) {
-      setRefetchUserVoted((r) => !r);
-    }
+    setRefetchUserVoted((r) => !r);
   };
 
   if (!pool) {

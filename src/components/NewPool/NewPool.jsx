@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 const MIN_OPTIONS_COUNT = 2;
 
-const NewPool = ({ onSubmit }) => {
+const NewPool = ({ onSubmit, loading }) => {
   const navigate = useNavigate();
   const onFinish = (values) => {
     onSubmit?.({
@@ -114,6 +114,7 @@ const NewPool = ({ onSubmit }) => {
               htmlType="submit"
               size="large"
               style={{ width: "100%" }}
+              loading={loading}
             >
               Create
             </Button>

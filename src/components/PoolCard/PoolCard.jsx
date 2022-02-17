@@ -3,7 +3,7 @@ import { Row, Space, Typography, Button, Divider, Spin } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import PoolResultConnected from "../PoolResult/PoolResultConnected";
-import PoolVoteForm from "../PoolVoteForm/PoolVoteForm";
+import PoolVoteFormConnected from "../PoolVoteForm/PoolVoteFormConnected";
 
 const PoolCard = ({ pool, options, onVote, userVoted, contentLoading }) => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const PoolCard = ({ pool, options, onVote, userVoted, contentLoading }) => {
               {userVoted ? (
                 <PoolResultConnected options={options} />
               ) : (
-                <PoolVoteForm onFinish={onVote} options={options} />
+                <PoolVoteFormConnected onFinish={onVote} options={options} />
               )}
             </>
           )}

@@ -24,8 +24,18 @@ const NearProvider = ({ children, config }) => {
         walletConnection.account(),
         config.contractName,
         {
-          viewMethods: ["get"],
-          changeMethods: ["create", "update", "del"],
+          viewMethods: [
+            "getPool",
+            "getPoolsList",
+            "getPoolOptions",
+            "getPoolVotes",
+          ],
+          changeMethods: [
+            "createPoolWithOptions",
+            "deletePool",
+            "createVote",
+            "checkAccountVote",
+          ],
           sender: walletConnection.getAccountId(),
         }
       );
