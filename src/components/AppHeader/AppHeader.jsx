@@ -11,20 +11,17 @@ const AppHeader = () => {
   const isAuth = useCheckAuth();
   const logout = useLogout();
 
-  if (isAuth) {
-    return (
-      <Row justify="space-between" align="middle">
-        <Logo style={{ width: 130, fill: "white" }} />
-        {isAuth && (
-          <Space align="center" size="large">
-            <Text style={{ color: "white" }}>{wallet.getAccountId()}</Text>
-            <Button onClick={logout} icon={<LogoutOutlined />} shape="circle" />
-            ;
-          </Space>
-        )}
-      </Row>
-    );
-  }
+  return (
+    <Row justify="space-between" align="middle">
+      <Logo style={{ width: 130, fill: "white" }} />
+      {isAuth && (
+        <Space align="center" size="large">
+          <Text style={{ color: "white" }}>{wallet.getAccountId()}</Text>
+          <Button onClick={logout} icon={<LogoutOutlined />} shape="circle" />;
+        </Space>
+      )}
+    </Row>
+  );
 };
 
 export default AppHeader;
