@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME;
+const CONTRACT_NAME = process.env.REACT_APP_CONTRACT_NAME;
 
 const getConfig = (env) => {
   switch (env) {
