@@ -8,7 +8,7 @@ import { useNear } from "../../hooks/near";
 const PoolCardConnected = () => {
   const { id } = useParams();
   const poolId = useMemo(() => parseInt(id), [id]);
-  const { contract } = useNear();
+  const { contract, wallet } = useNear();
 
   const [refetchUserVoted, setRefetchUserVoted] = useState(false);
 
@@ -17,8 +17,9 @@ const PoolCardConnected = () => {
     [poolId, contract]
   );
   const [userVoted, checkAccountError, userVotedState] = usePromise(
-    () => contract.checkAccountVote({ poolId }),
-    [poolId, contract, refetchUserVoted]
+    () =>
+      contract.checkAccountVote({ poolId, accountId: wallet.getAccountId() }),
+    [poolId, contract, refetchUserVoted, wallet]
   );
 
   const [options, getPoolOptionsError, optionsState] = usePromise(

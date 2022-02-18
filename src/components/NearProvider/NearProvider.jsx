@@ -29,13 +29,9 @@ const NearProvider = ({ children, config }) => {
             "getPoolsList",
             "getPoolOptions",
             "getPoolVotes",
-          ],
-          changeMethods: [
-            "createPoolWithOptions",
-            "deletePool",
-            "createVote",
             "checkAccountVote",
           ],
+          changeMethods: ["createPoolWithOptions", "deletePool", "createVote"],
           sender: walletConnection.getAccountId(),
         }
       );

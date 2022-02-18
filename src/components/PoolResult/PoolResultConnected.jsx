@@ -7,10 +7,14 @@ import { useNear } from "../../hooks/near";
 
 const PoolResultConnected = ({ options }) => {
   const { id } = useParams();
-  const { contract } = useNear();
+  const { contract, wallet } = useNear();
   const [votes = [], error, votesState] = usePromise(
-    () => contract.getPoolVotes({ poolId: parseInt(id) }),
-    [id, contract]
+    () =>
+      contract.getPoolVotes({
+        poolId: parseInt(id),
+        accountId: wallet.getAccountId(),
+      }),
+    [id, contract, wallet]
   );
 
   if (votesState === "pending") {
