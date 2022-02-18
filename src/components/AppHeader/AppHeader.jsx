@@ -12,8 +12,15 @@ const AppHeader = () => {
   const logout = useLogout();
 
   return (
-    <Row justify="space-between" align="middle">
-      <Logo style={{ width: 130, fill: "white" }} />
+    <Row justify="space-between" align="middle" style={{ height: "100%" }}>
+      <a
+        href="https://www.curves.digital/"
+        target="_blank"
+        style={{ display: "flex" }}
+        rel="noreferrer"
+      >
+        <Logo style={{ width: 130, fill: "white" }} />
+      </a>
       {isAuth && (
         <Space align="center" size="large">
           <Text style={{ color: "white" }}>{wallet.getAccountId()}</Text>
